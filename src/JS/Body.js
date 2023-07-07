@@ -16,6 +16,7 @@ export default function Body() {
     const [balance, setBalance] = useState(100);
     const [stake, setStake] = useState(0);
     const [selectedOption, setSelectedOption] = useState("");
+    const [announcement, setAnnouncement] = useState("");
 
     const generateRandomNumber = () => {
         const array = new Uint8Array(1);
@@ -27,13 +28,13 @@ export default function Body() {
         const newDieOneValue = generateRandomNumber();
         const newDieTwoValue = generateRandomNumber();
         const newCount = newDieOneValue + newDieTwoValue;
-
+    
         setDieOneValue(newDieOneValue);
         setDieTwoValue(newDieTwoValue);
         setCount(newCount);
-
+    
         const selectedNumber = parseInt(selectedOption);
-
+    
         if (
             (selectedOption === "lower" && newCount < 7) ||
             (selectedOption === "equal" && newCount === 7) ||
@@ -46,13 +47,13 @@ export default function Body() {
             } else {
                 multiplier = 2.2;
             }
-            const winnings = stake * multiplier;
-            setBalance(prevBalance => prevBalance + winnings);
-            alert(`Congratulations! You won ${winnings} EGP`);
+            const winnings = (stake * multiplier).toFixed(2);
+            setBalance(prevBalance => prevBalance + parseFloat(winnings));
+            setAnnouncement(`Congratulations! You won ${winnings} EGP`);
         } else {
             // User loses
             setBalance(prevBalance => prevBalance - stake);
-            alert("Oops! You lost.");
+            setAnnouncement("Oops! You lost.");
         }
     };
 
@@ -78,8 +79,9 @@ export default function Body() {
     };
 
     return (
-        <>
+        <div className="main">
             <div className="header">
+
                 <a href="home" id="Balance">
                     BALANCE: {balance} EGP
                 </a>
@@ -88,6 +90,7 @@ export default function Body() {
                 </a>
             </div>
             <div className="container">
+                <h1 id="announcement">{announcement}</h1>
                 <div className="dice-wrapper">
                     <img id="die-1" alt="" src={images[dieOneValue - 1]} />
                     <img id="die-2" alt="" src={images[dieTwoValue - 1]} />
@@ -101,36 +104,20 @@ export default function Body() {
                             checked={selectedOption === "7"}
                             onChange={handleOptionChange}
                         />
-                        Equal to 7 (5.6x)
+                        <h1>Equal to 7 (5.6x)</h1>
                     </label>
                     <label>
-                        <input
-                            type="radio"
-                            value="lower"
-                            checked={selectedOption === "lower"}
-                            onChange={handleOptionChange}
-                        />
-                        Lower than 7 (2.2x)
+                        <input type="radio" value="lower" checked={selectedOption === "lower"} onChange={handleOptionChange} />
+                        <h1>Lower than 7 (2.2x)</h1>
                     </label>
                     <label>
-                        <input
-                            type="radio"
-                            value="higher"
-                            checked={selectedOption === "higher"}
-                            onChange={handleOptionChange}
-                        />
-                        Higher than 7 (2.2x)
+                        <input type="radio" value="higher" checked={selectedOption === "higher"} onChange={handleOptionChange} />
+                        <h1>Higher than 7 (2.2x)</h1>
                     </label>
                 </div>
                 <div className="formInput">
                     <div className="formText">
-                        <input
-                            type="number"
-                            value={stake}
-                            onChange={handleStakeChange}
-                            placeholder="Enter your stake"
-                            min="0"
-                        />
+                        <input type="number" value={stake} onChange={handleStakeChange} placeholder="Enter your stake" min="0" />
                     </div>
                 </div>
                 <br />
@@ -138,6 +125,6 @@ export default function Body() {
                     ROLL THE DICE
                 </button>
             </div>
-        </>
+        </div>
     );
 }

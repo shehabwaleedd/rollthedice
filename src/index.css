@@ -21,54 +21,132 @@ code {
 
 body {
   height: 100vh;
-  background: linear-gradient(#7c2ee9,
-      #6a6fff) 0 100% no-repeat;
-  background-size: 100% 100%;
+  /* background-color:#f0ffa6; */
+  /* background-color: #99b9ff; */
+  background-color: #d8dafd;
+
+}
+
+.main {
+  position: relative;
+  z-index: 999999;
+}
+
+.header {
+
+}
+
+.header h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fd7f7f;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.325rem;
+  transition: 0.3s ease;
 }
 
 .container {
-  width: 30%;
+  width: 60%;
   padding: 50px;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  background: rgba(250, 244, 235, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(120px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(250, 244, 235, 0.3);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  top: 20rem;
+  z-index: 99999;
+}
+
+.container p {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fd4d4d;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.125rem;
+  transition: 0.3s ease;
+
 }
 
 .dice-wrapper {
-  width: 90%;
+  width: 50%;
   display: flex;
   justify-content: space-around;
-
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
-p {
-  font-size: 16px;
-  margin: 30px 0;
-  font-weight: 600;
+
+.odds-bets {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 2rem;
 }
+
+.odds-bets label {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  width: 16vw;
+  text-align: center;
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.odds-bets label h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.125rem;
+  transition: 0.3s ease;
+  background-color: #8c8af4;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.odds-bets label:focus-within h1 {
+  outline: none;
+  background-color: #5351c2;
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.odds-bets label input[type="radio"] {
+  left: -999em;
+  position: absolute;
+}
+
+
 
 .Roll {
 
   margin-top: 40px;
   font-family: "Poppins", sans-serif;
-  background-color: #6a6fff;
+  /* background-color: #93e1d8; */
+  background: #b5abfa;
   border: none;
   outline: none;
   color: #ffffff;
   padding: 22px 10px;
-  width: 12.375rem;
+  width: 22.375rem;
   letter-spacing: 0.2rem;
   border-radius: 20px;
   font-size: 1rem;
@@ -77,19 +155,10 @@ p {
   transition: 0.3s ease;
 }
 
-.odds-bets {
-  display: flex;
-  flex-direction: column
-}
-
-.odds-bets label {
-  display: flex;
-  gap: 1rem;
-}
 
 .odds-bets button {
   font-family: "Poppins", sans-serif;
-  background-color: #6a6fff;
+  background-color: #b5abfa;
   border: none;
   outline: none;
   color: #ffffff;
@@ -125,32 +194,49 @@ p {
 .header {
   font-family: "Poppins", sans-serif;
   display: flex;
-  padding: 20px;
+  padding: 2.25rem;
   text-decoration: none;
   justify-content: space-between;
 }
 
+.rest {
+  display: flex;
+  gap: 2rem;
+}
+
 #Balance {
-  color: #ffffff;
+  color: #515151;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 600;
+  font-family: "Poppins";
   text-transform: capitalize;
   font-size: 1rem;
   letter-spacing: 2px;
-  border: 1px solid #ffffff;
+  background: #91e6ecfc;
+  box-shadow: 0px -3px 32px 0 rgba(31, 135, 114, 0.37);
+  backdrop-filter: blur( 3px );
+  border-radius: 10px;
+  border: 0.5px solid rgba(144, 101, 164, 0.504);
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   padding: 10px 20px;
   border-radius: 20px;
   transition: 0.3s ease;
 }
 
 #Stake {
-  color: #ffffff;
+  color: #515151;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 600;
+  font-family: "Poppins";
   text-transform: capitalize;
   font-size: 1rem;
   letter-spacing: 2px;
-  border: 1px solid #ffffff;
+  background: #91e6ecfc;
+  box-shadow: 0px -3px 32px 0 rgba(31, 135, 114, 0.37);
+  backdrop-filter: blur( 3px );
+  border-radius: 10px;
+  border: 0.5px solid rgba(144, 101, 164, 0.504);
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   padding: 10px 20px;
   border-radius: 20px;
   transition: 0.3s ease;
@@ -187,18 +273,18 @@ input {
   text-align: center;
 }
 
-.formInput button {
+.formInput input {
   font-family: "Poppins", sans-serif;
-  background-color: #e893d0;
-  border: none;
+  background-color: #ceb1f9;
+  border: 0.5px solid rgba(144, 101, 164, 0.504);
   outline: none;
   color: #ffffff;
-  padding: 5px 10px 5px 10px;
-  width: 80px;
+  padding: 1rem 2rem;
+  width: 14rem;
   letter-spacing: 1px;
   margin-left: 20px;
   border-radius: 10px;
-  font-size: 12.3px;
+  font-size: 1.3rem;
   font-weight: 580;
   cursor: pointer;
   transition: 0.3s ease;
@@ -206,4 +292,24 @@ input {
 
 button:hover {
   opacity: 0.8;
+}
+
+
+#announcement {
+  font-family: "Poppins", sans-serif;
+  background-color: #b5abfa;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 5px 10px;
+  width: 25rem;
+  letter-spacing: 1px;
+  margin-left: 20px;
+  border-radius: 10px;
+  font-size: 1.7125rem;
+  font-weight: 480;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-align: center;
+  margin-bottom: 3rem;
 }
