@@ -17,6 +17,32 @@ export default function Body() {
     const [stake, setStake] = useState(0);
     const [selectedOption, setSelectedOption] = useState("");
     const [announcement, setAnnouncement] = useState("");
+    const [lastSelectedOption, setLastSelectedOption] = useState("");
+    const [lowerthan7, setLowerthan7] = useState(false);
+    const [higherthan7, setHigherthan7] = useState(false);
+    const [equalto7, setEqualto7] = useState(false);
+
+
+    const handleLowerthan7 = () => {
+        setLowerthan7(true);
+        setHigherthan7(false);
+        setEqualto7(false);
+    };
+
+    const handleHigherthan7 = () => {
+        setHigherthan7(true);
+        setLowerthan7(false);
+        setEqualto7(false);
+    };
+
+    const handleEqualto7 = () => {
+        setEqualto7(true);
+        setLowerthan7(false);
+        setHigherthan7(false);
+    };
+
+
+
 
     const generateRandomNumber = () => {
         const array = new Uint8Array(1);
@@ -33,11 +59,11 @@ export default function Body() {
         setDieTwoValue(newDieTwoValue);
         setCount(newCount);
     
-        const selectedNumber = parseInt(selectedOption);
+        const selectedNumber = parseInt(lastSelectedOption);
     
         if (
             (selectedOption === "lower" && newCount < 7) ||
-            (selectedOption === "equal" && newCount === 7) ||
+            (selectedNumber === 7 && newCount === 7) ||
             (selectedOption === "higher" && newCount > 7)
         ) {
             // User wins
@@ -59,6 +85,7 @@ export default function Body() {
 
     const handleOptionChange = event => {
         setSelectedOption(event.target.value);
+        setLastSelectedOption(event.target.value); // Store the selected option
     };
 
     const handleStakeChange = event => {
@@ -68,12 +95,13 @@ export default function Body() {
 
     const handleRollClick = () => {
         if (stake > balance) {
-            alert("Insufficient balance. Please lower your stake.");
+            setAnnouncement("Insufficient balance. Please lower your stake.");
         } else if (stake <= 0) {
-            alert("Invalid stake amount. Please enter a positive value.");
+            setAnnouncement("Invalid stake amount. Please enter a positive value.");
         } else if (!selectedOption) {
-            alert("Please select an option before rolling the dice.");
+            setAnnouncement("Please select an option before rolling the dice.");
         } else {
+            
             rollDice();
         }
     };
@@ -90,14 +118,13 @@ export default function Body() {
                 </a>
             </div>
             <div className="container">
-                <h1 id="announcement">{announcement}</h1>
+                <h1 className={`${announcement ? "announcement" : "hidden"}`}>{announcement}</h1>
                 <div className="dice-wrapper">
                     <img id="die-1" alt="" src={images[dieOneValue - 1]} />
                     <img id="die-2" alt="" src={images[dieTwoValue - 1]} />
                 </div>
-                <p id="total">Your roll is {count}</p>
                 <div className="odds-bets">
-                    <label>
+                    <label className={`${equalto7 ? "odds-bets checked" : "odds-bets"}`} onClick={handleEqualto7}>
                         <input
                             type="radio"
                             value="7"
@@ -106,11 +133,11 @@ export default function Body() {
                         />
                         <h1>Equal to 7 (5.6x)</h1>
                     </label>
-                    <label>
-                        <input type="radio" value="lower" checked={selectedOption === "lower"} onChange={handleOptionChange} />
+                    <label className={`${lowerthan7 ? "odds-bets checked" : "odds-bets"}`} onClick={handleLowerthan7}>
+                        <input type="radio" value="lower" checked={selectedOption === "lower"} onChange={handleOptionChange}  />
                         <h1>Lower than 7 (2.2x)</h1>
                     </label>
-                    <label>
+                    <label  className={`${higherthan7 ? "odds-bets checked" : "odds-bets"}`} onClick={handleHigherthan7}>
                         <input type="radio" value="higher" checked={selectedOption === "higher"} onChange={handleOptionChange} />
                         <h1>Higher than 7 (2.2x)</h1>
                     </label>
